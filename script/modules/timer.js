@@ -1,7 +1,5 @@
 
 const timerElement = document.querySelector('.timer');
-
-
 const deadline = new Date(2024, 2, 20, 0, 0, 0);
 console.log(deadline);
 
