@@ -1,6 +1,6 @@
 
 const timerElement = document.querySelector('.timer');
-const deadline = new Date(2024, 2, 20, 0, 0, 0);
+const deadline = new Date(2024, 2, 25, 0, 0, 0);
 console.log(deadline);
 
 
@@ -36,20 +36,11 @@ function formatNumber(number) {
 	return number < 10 ? '0' + number : number;
 }
 
-let declOfNum = function(number, titles) {
+let declOfNum = function (number, titles) {
 	return titles[number % 10 === 1 && number % 100 !== 11 ? 0 : number % 10 >= 2 && number % 10 <= 4 && (number % 100 < 10 || number % 100 >= 20) ? 1 : 2];
 }
 
-// var declOfNum = function(number, titles) {
-// 	var cases = [2, 0, 1, 1, 1, 2];
-// 	return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
-//  }
 
-//  // Пример использования:
-//  var days = 5;
-//  var titles = ['день', 'дня', 'дней'];
-//  var result = declOfNum(days, titles);
-//  console.log(result); // выводит "дней"
 
 
 
