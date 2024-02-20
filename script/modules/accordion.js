@@ -1,7 +1,7 @@
 const travelItem = document.querySelectorAll(".travel__item");
 const travelItemTitle = document.querySelectorAll(".travel__item-title");
 const travelItemTextWrapper = document.querySelectorAll(".travel__item-text-wrapper");
-console.log(travelItemTitle);
+
 
 let heightWrapper = 0;
 
