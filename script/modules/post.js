@@ -1,5 +1,6 @@
+import showModal from "./modal.js";
 const URL = "https://jsonplaceholder.typicode.com/posts";
-
+1
 // проверочная фнкция при fetch запросе
 const fetchRequest = async (url, {
 	method = "GET",
@@ -26,6 +27,10 @@ const fetchRequest = async (url, {
 }
 
 const reservationForm = document.querySelector(".reservation__form");
+const reservationButton = reservationForm.querySelector(".reservation__button");
+reservationButton.addEventListener("click", async ({ target }) => {
+	showModal();
+})
 reservationForm.addEventListener("submit", (event) => {
 	event.preventDefault();
 	const formData = new FormData(reservationForm);
@@ -48,7 +53,6 @@ reservationForm.addEventListener("submit", (event) => {
 })
 
 const footerForm = document.querySelector(".footer__form");
-console.log(footerForm);
 footerForm.addEventListener("submit", (event) => {
 	event.preventDefault();
 	const formData = new FormData(footerForm);
