@@ -38,8 +38,25 @@ renderForm();
 
 const renderReservation = async () => {
 	const data = await loadData();
+	// const price = await Promise.all(data.map(async entry => {
+	// 	return entry['price'];
+	// }))
 	const reservationDate = document.querySelector("#reservation__date");
 	const reservationPeople = document.querySelector("#reservation__people");
+	// const totalCostInfo = document.querySelector(".reservation__price")
+
+	// const updateTotalCost = async () => {
+	// 	const selectedDate = reservationDate.value;
+	// 	const selectedPeople = reservationPeople.value;
+	// 	await loadData();
+	// 	const selectedData = data.find(item => item.date === selectedDate);
+	// 	const totalCost = selectedData.price * selectedPeople;
+	// 	totalCostInfo.textContent = `Total Cost: $${totalCost}`;
+	// };
+
+	// reservationDate.addEventListener('change', updateTotalCost);
+	// reservationPeople.addEventListener('change', updateTotalCost);
+
 
 	const reservationList = data.map(item => {
 		const option = document.createElement("option");
