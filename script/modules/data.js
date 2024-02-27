@@ -20,6 +20,7 @@ const renderForm = async () => {
 
 	const dataList = data.map(item => {
 		const option = document.createElement("option");
+		option.classList.add("tour__option");
 		option.value = item.date;
 		option.textContent = item.date;
 		return option;
@@ -28,6 +29,7 @@ const renderForm = async () => {
 
 	const dataPeople = data.map(item => {
 		const option = document.createElement("option");
+		option.classList.add("tour__option");
 		option.value = item.date;
 		option.textContent = `${item['min-people']} - ${item['max-people']}`;
 		return option;
@@ -36,7 +38,7 @@ const renderForm = async () => {
 }
 renderForm();
 
-const renderReservation = async () => {
+export const renderReservation = async () => {
 	const data = await loadData();
 	// const price = await Promise.all(data.map(async entry => {
 	// 	return entry['price'];
