@@ -1,6 +1,6 @@
 import showModal from "./modal.js";
 const URL = "https://jsonplaceholder.typicode.com/posts";
-1
+
 // проверочная фнкция при fetch запросе
 const fetchRequest = async (url, {
 	method = "GET",
@@ -26,20 +26,17 @@ const fetchRequest = async (url, {
 	}
 }
 
+
 const reservationForm = document.querySelector(".reservation__form");
-const reservationButton = reservationForm.querySelector(".reservation__button");
-reservationButton.addEventListener("click", async ({ target }) => {
-	showModal();
-})
-reservationForm.addEventListener("submit", (event) => {
+reservationForm.addEventListener("submit", async (event) => {
 	event.preventDefault();
 	const formData = new FormData(reservationForm);
 	const body = Object.fromEntries(formData.entries());
-	fetchRequest(URL, {
+	const checkBuy = await fetchRequest(`${URL}`, {
 		method: "POST",
 		body,
 		headers: {
-			"Content-Type": "application/json:charset=utf-8",
+			"Content-Type": "application/json;charset=utf-8",
 		},
 		callback: (err, data) => {
 			if (err) {
@@ -49,8 +46,14 @@ reservationForm.addEventListener("submit", (event) => {
 			console.log(data);
 			reservationForm.textContent = `Заявка успешно отправлена. ID: ${data.id}`;
 		},
+		callback: showModal,
 	});
+	console.log(checkBuy);
+	if (checkBuy) {
+		target.textContent = "Забронировано"
+	}
 })
+
 
 const footerForm = document.querySelector(".footer__form");
 footerForm.addEventListener("submit", (event) => {

@@ -62,6 +62,7 @@ export const renderReservation = async () => {
 
 	const reservationList = data.map(item => {
 		const option = document.createElement("option");
+		option.classList.add("tour__option")
 		option.value = item.date;
 		option.textContent = item.date;
 		return option;
@@ -70,6 +71,7 @@ export const renderReservation = async () => {
 
 	const reservationPeopleList = data.map(item => {
 		const option = document.createElement("option");
+		option.classList.add("tour__option");
 		option.value = item.date;
 		option.textContent = `${item['min-people']} - ${item['max-people']}`;
 		return option;

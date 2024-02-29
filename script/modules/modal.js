@@ -2,7 +2,6 @@ import loadStyle from "./loadStyles.js";
 
 
 const showModal = async (err, data) => {
-   console.log(data);
 	await loadStyle("css/modal.css");
 	const overlay = document.createElement('div');
 	const modalWindow = document.createElement('div');
@@ -21,7 +20,7 @@ const showModal = async (err, data) => {
 	modalText1.classList.add("modal__text");
 	modalText1.textContent = `Бронирование путешествия в Индию на человек`;
 	modalText2.classList.add("modal__text");
-	modalText2.textContent = `В даты:`;
+	modalText2.textContent = `В даты:${data.date}`;
 	modalText3.classList.add("modal__text");
 	modalText3.textContent = `Стоимость тура 459 588₽`;
 	modalButton.classList.add("modal__button");
