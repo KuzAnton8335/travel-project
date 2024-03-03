@@ -38,31 +38,54 @@ const renderForm = async () => {
 }
 renderForm();
 
+export let formData;
+
 export const renderReservation = async () => {
 	const data = await loadData();
-	// const price = await Promise.all(data.map(async entry => {
-	// 	return entry['price'];
-	// }))
+
+	const reservationForm = document.querySelector(".reservation__form");
+	const reservationPrice = reservationForm.querySelector(".reservation__price");
+	const reservationData = reservationForm.querySelector(".reservation__data");
 	const reservationDate = document.querySelector("#reservation__date");
 	const reservationPeople = document.querySelector("#reservation__people");
-	// const totalCostInfo = document.querySelector(".reservation__price")
 
-	// const updateTotalCost = async () => {
-	// 	const selectedDate = reservationDate.value;
-	// 	const selectedPeople = reservationPeople.value;
-	// 	await loadData();
-	// 	const selectedData = data.find(item => item.date === selectedDate);
-	// 	const totalCost = selectedData.price * selectedPeople;
-	// 	totalCostInfo.textContent = `Total Cost: $${totalCost}`;
-	// };
+	for (let i = 0; i < reservationDate.options.length; i++) {
+		if (i <= 4) {
+			reservationDate.options[i].disabled = true;
+		}
+	}
+	for (let i = 0; i < reservationPeople.options.length; i++) {
+		if (i <= 6) {
+			reservationPeople.options[i].disabled = true;
+		}
+	}
 
-	// reservationDate.addEventListener('change', updateTotalCost);
-	// reservationPeople.addEventListener('change', updateTotalCost);
+	const updateCost = () => {
+		const selectedDate = reservationDate.value;
+		const selectedPeople = reservationPeople.value;
+		// const sumPeople = data.find((item) => item.date === selectedDate)['max-people'] - data.find((item) => item.date === selectedDate)['min-people'];
+		const sumPeople = data.find(value => value)['max-people'] - data.find(value => value)['min-people'];
 
+		const selectedItem = data.find((item) => item.date === selectedDate);
+		const pricePerPerson = selectedItem.price;
+		const totalCost = pricePerPerson;//* sumPeople
+		reservationPrice.textContent = `${totalCost} ₽`;
+		reservationData.textContent = `${selectedDate}, ${selectedPeople} человек`;
+
+		formData = {
+			selectedDate: reservationDate.value,
+			selectedPeople: reservationPeople.value,
+			totalCost: totalCost,
+			reservationForm: reservationForm,
+		}
+	};
+
+	reservationDate.addEventListener("change", updateCost);
+	reservationPeople.addEventListener("change", updateCost);
 
 	const reservationList = data.map(item => {
 		const option = document.createElement("option");
-		option.classList.add("tour__option")
+		option.classList.add("tour__option");
 		option.value = item.date;
 		option.textContent = item.date;
 		return option;
@@ -72,7 +95,7 @@ export const renderReservation = async () => {
 	const reservationPeopleList = data.map(item => {
 		const option = document.createElement("option");
 		option.classList.add("tour__option");
-		option.value = item.date;
+		option.value = `${item['min-people']} - ${item['max-people']}`;
 		option.textContent = `${item['min-people']} - ${item['max-people']}`;
 		return option;
 	});

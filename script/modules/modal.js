@@ -1,7 +1,8 @@
+import { formData } from "./data.js";
 import loadStyle from "./loadStyles.js";
 
 
-const showModal = async (err, data) => {
+const showModal = async () => {
 	await loadStyle("css/modal.css");
 	const overlay = document.createElement('div');
 	const modalWindow = document.createElement('div');
@@ -12,6 +13,9 @@ const showModal = async (err, data) => {
 	const modalButton = document.createElement('div');
 	const modalBtnConfirm = document.createElement('button');
 	const modalBtnEdit = document.createElement('button');
+	const newReservationForm = formData.reservationForm;
+
+
 
 	overlay.classList.add('overlay', 'overlay_confirm');
 	modalWindow.classList.add("modal");
@@ -20,9 +24,9 @@ const showModal = async (err, data) => {
 	modalText1.classList.add("modal__text");
 	modalText1.textContent = `Бронирование путешествия в Индию на человек`;
 	modalText2.classList.add("modal__text");
-	modalText2.textContent = `В даты:${data.date}`;
+	modalText2.textContent = `В даты:${formData.selectedDate}`;
 	modalText3.classList.add("modal__text");
-	modalText3.textContent = `Стоимость тура 459 588₽`;
+	modalText3.textContent = `Стоимость тура ${formData.totalCost} ₽`;
 	modalButton.classList.add("modal__button");
 	modalBtnConfirm.classList.add("modal__btn", "modal__btn_confirm");
 	modalBtnConfirm.textContent = "Подтверждаю";
@@ -37,6 +41,10 @@ const showModal = async (err, data) => {
 	return new Promise((resolve) => {
 		modalBtnConfirm.addEventListener("click", () => {
 			overlay.remove();
+			newReservationForm.reset();
+			for (let i = 0; i < newReservationForm.elements.length; i++) {
+				newReservationForm.elements[i].disabled = true;
+			}
 			resolve(true);
 		})
 		modalBtnEdit.addEventListener("click", () => {
